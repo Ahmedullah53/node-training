@@ -2,13 +2,23 @@ const express = require('express')
 const path = require('path')
 const router = express.Router()
 
+const users = [
+    { username: "Raphael", email: "raphael@gmail.com" },
+    { username: "Michelangelo", email: "michelangelo@gmail.com" },
+    { username: "Leonardo", email: "leonardo@gmail.com" },
+    { username: "Donetello", email: "donetello@gmail.com" },
+    { username: "Splinter", email: "splinter@gmail.com" },
+    { username: "Shredder", email: "shredder@gmail.com" }
+]
+
 router.get('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'users.html'))
+    res.render("users", { users: users, docTitle: "Users"})
 })
 
 router.post('/add-user', (req, res, next) => {
-    console.log(req.body)
-    res.redirect('/')
+    users.push(req.body)
+    console.log(users)
+    res.redirect('/user')
 })
 
 module.exports = router

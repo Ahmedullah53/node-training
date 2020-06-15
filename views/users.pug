@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{docTitle}
+        link(rel="stylesheet", href="/users.css")
+    body
+        table
+            tr
+                th username
+                th email
+            if users.length > 0
+                each user in users
+                    tr
+                        td #{user.username}
+                        td #{user.email}

@@ -6,13 +6,16 @@ const path = require("path")
 const app = express()
 const port = 3000
 
+app.set("view engine", "pug")
+app.set("views", "views")
+
 app.use(bodyParser.urlencoded())
 app.use(express.static(path.join(__dirname, "css")))
 
 app.use('/user', userRoutes)
 
 app.get('/',(req, res, next) => {
-    res.sendFile(path.join(__dirname, "views", "main.html"))
+    res.render("main")
 })
 
 app.use((req, res, next) => {
