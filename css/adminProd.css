@@ -1,0 +1,49 @@
+div{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 30px;
+}
+
+table{
+    border-collapse: collapse;
+    width: 80%;
+    text-align: center;
+    align-self: center;
+}
+
+tr:nth-child(odd){
+    background-color: lightgray;
+}
+
+tr:nth-child(even){
+    background-color: whitesmoke;
+}
+
+.inline-opt{
+    display: inline;
+}
+
+.del-btn{
+    border: 2px solid firebrick;
+    color: firebrick;
+    background-color: inherit;
+    padding: 5px;
+}
+
+.del-btn:hover{
+    background-color: firebrick;
+    color: whitesmoke;
+}
+
+.edt-btn{
+    border: 2px solid dodgerblue;
+    color: dodgerblue;
+    background-color: inherit;
+    padding: 5px;
+}
+
+.edt-btn:hover{
+    background-color: dodgerblue;
+    color: whitesmoke;
+}

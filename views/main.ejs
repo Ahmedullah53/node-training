@@ -1,0 +1,27 @@
+        <%- include('includes/head.ejs') %>
+    </head>
+    <body>
+        <%- include('includes/nav.ejs') %>
+        <h1>Hello world</h1>
+        <div class="grid">
+        <% if (products.length > 0) { %>
+            <% products.forEach(product => { %>
+                    <div class="crd">
+                        <div class="crd-title">
+                            <h2><%= product.title %></h2>
+                        </div>
+                        <div class="crd-img">
+                            <img src="<%= product.imgUrl %>" alt="ev02" width="250" height="250"/>
+                        </div>
+                        <div class="crd-price">
+                            <h3><%= product.price %></h3>
+                        </div>
+                        <div class="crd-des">
+                            <p><%= product.desc %></p>
+                        </div>
+                    </div>
+                <% }); %>
+            <% }; %>
+        </div>
+    </body>
+</html>

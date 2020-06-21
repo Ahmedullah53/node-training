@@ -1,24 +1,26 @@
-const express = require("express")
-const bodyParser = require("body-parser")
-const userRoutes = require("./routes/user")
-const path = require("path")
+const bodyParser = require('body-parser')
+const path = require('path')
+const mainRouter = require('./routes/main')
+const errorRouter = require('./routes/error')
+const sequelize = require('./util/database')
+const express = require('express')
 
 const app = express()
+
 const port = 3000
 
-app.set("view engine", "pug")
-app.set("views", "views")
+app.set('view engine', 'ejs')
+app.set('views', 'views')
 
-app.use(bodyParser.urlencoded())
-app.use(express.static(path.join(__dirname, "css")))
+app.use(bodyParser.urlencoded({ extended: false}))
+app.use(express.static(path.join(__dirname, 'css')))
 
-app.use('/user', userRoutes)
+app.use(mainRouter)
+app.use(errorRouter)
 
-app.get('/',(req, res, next) => {
-    res.render("main")
+sequelize.sync().then(result => {
+    // console.log(result)
+    app.listen(port, () => console.log(`App running on port ${port}`))
+}).catch(err =>{
+    console.log(err)
 })
-
-app.use((req, res, next) => {
-    res.sendFile(path.join(__dirname, "views", "404.html"))
-})
-app.listen(port, () => console.log(`Example app listening on port port!`))
