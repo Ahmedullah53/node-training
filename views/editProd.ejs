@@ -5,7 +5,7 @@
         <% if (product !== null ) { %>
             <div class="frm">
                 <form action="/edit-product" method="post">
-                    <input type="hidden" name="id" value="<%= product.id %>">
+                    <input type="hidden" name="id" value="<%= product._id %>">
                     <input type="text" name="title" value="<%= product.title %>">
                     <input type="text" name="imgUrl" value="<%= product.imgUrl %>">
                     <input type="text" name="price" value="<%= product.price %>">

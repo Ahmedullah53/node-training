@@ -1,7 +1,8 @@
+const mongodb = require('mongodb')
 const Product = require('../models/product')
 
 exports.getHome = (req, res, next) => {
-    Product.findAll()
+    Product.fetchAll()
     .then(products => {
         res.render('main', { pageTitle:'Home', path:'/', products:products})
     }).catch(err => console.log(err) )
@@ -13,12 +14,8 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
     const {title, imgUrl, price, desc} = req.body
-    Product.create({
-        title: title,
-        imgUrl: imgUrl,
-        price: price,
-        desc: desc
-    }).then(result => {
+    const product = new Product(title, imgUrl, price, desc)
+    product.save().then(result => {
         console.log('Product added')
     }).catch(err => {
         console.log('there is some issue with sequelize or your database')
@@ -40,16 +37,8 @@ exports.getEditProduct = (req, res, next) => {
 exports.postEditProduct = (req, res, next) => {
     console.log('in post edit')
     const {id, title, imgUrl, price, desc} = req.body
-    Product.update({
-        title:title,
-        imgUrl:imgUrl,
-        price:price,
-        desc:desc
-    }, {
-        where:{
-            id:id
-        }
-    })
+    const product = new Product(title, imgUrl, price, desc)
+    product.update(id)
     .then(result => {
         console.log('Product updated')
         res.redirect('/')
@@ -58,18 +47,16 @@ exports.postEditProduct = (req, res, next) => {
 }
 
 exports.postDelProduct = (req, res, next) => {
-    Product.destroy({
-        where: {
-            id:req.body.id
-        }
-    }).then(result => {
+    const {id} = req.body
+    Product.delete(id)
+    .then(() => {
         console.log('Product Deteted')
         res.redirect('/admin-product')
     }).catch(err => console.log(err))
 }
 
 exports.getAdminProduct = (req, res, next) => {
-    Product.findAll()
+    Product.fetchAll()
     .then(products => {
         res.render('adminProd', { pageTitle:'Admin', path:'/admin-product', products:products})
     }).catch(err => console.log(err) )

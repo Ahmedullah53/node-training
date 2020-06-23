@@ -24,10 +24,10 @@
                             <td><%= product.desc %></td>
                             <td>
                                 <form action="/del-product" method="post" class="inline-opt">
-                                    <input type="hidden" name="id" value="<%= product.id %>">
+                                    <input type="hidden" name="id" value="<%= product._id %>">
                                     <button type="submit" class="del-btn">delete</button>
                                 </form>
-                                <a href="/edit-product?id=<%= product.id %>">
+                                <a href="/edit-product?id=<%= product._id %>">
                                     <button class="edt-btn">edit</button>
                                 </a>
                             </td>
